@@ -14,9 +14,13 @@ class PolyTreeNode
     par.children.push(self) 
   end
   
-  # 
-  # def remove_child
-  #   @parent.children
-  # end
+  
+  def add_child(child)
+      child.parent = self 
+  end
+    
+  def remove_child(child)
+    child.parent = nil
+  end
 
 end
