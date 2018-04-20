@@ -7,9 +7,16 @@ class PolyTreeNode
   end
   
   def parent=(par)
-    return @parent = nil if par.nil? || @parent == par 
-    @parent = par if @parent == nil
+    return @parent = par if par.nil? || parent == par 
+    
+    parent.children.delete(self) unless parent.nil?
+    @parent = par
     par.children.push(self) 
   end
+  
+  # 
+  # def remove_child
+  #   @parent.children
+  # end
 
 end
