@@ -20,7 +20,31 @@ class PolyTreeNode
   end
     
   def remove_child(child)
+    raise "Node is not a child." unless children.include?(child)
     child.parent = nil
   end
-
+  
+  
+  def dfs(target_value)
+    return self if target_value == value
+    return nil if children.empty?
+  
+    children.each do |node|
+      target_node = node.dfs(target_value)
+      return target_node if target_node.class == PolyTreeNode
+    end
+  
+    nil
+  end
+  
+  def bfs(target_value)
+    queue = [self] #shift/push
+    until queue.empty?
+      current = queue.shift
+      return current if current.value == target_value
+      current.children.each{|child| queue.push(child)}
+    end 
+    nil
+  end
+  
 end
